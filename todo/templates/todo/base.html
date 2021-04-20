@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo App</title>
+    <link rel="stylesheet" href="{% static 'todo/css/main.css' %}">
+  </head>
+  <body>
+    {% if user.is_authenticated %}
+    <p>Hello, {{user.username}} <a style="text-decoration: none;" href="{% url 'logout' %}">Logout</a></p>
+    {% endif %}
+      {% block content %}
+
+      {% endblock %}
+      
+      <script src="{% static 'todo/js/main.js' %}"></script>
+    </body>
+  </html>

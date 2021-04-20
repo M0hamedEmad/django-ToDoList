@@ -1,0 +1,52 @@
+{% extends 'todo/base.html' %}
+{% block content %}
+<div class="todo-container">
+        
+        <!-- Start add task -->
+      <form method="POST">
+          {% csrf_token %}
+          <div class="add-task">
+            {{form}}
+            <input type="submit" value="+" class="plus" name="plus">
+        </div>
+      </form>  
+      <!-- end add task -->
+
+      <!-- Start tasks content -->
+      <div class="tasks-content">
+          {% for task in tasks %}
+
+            <form action="" method="POST" class="">
+                {% csrf_token %}
+                <button name="finsh" type="submit" class="text-box-button">
+                    {% if task.completed %}  
+                    <span class="task-box finished">
+                        {{task.content}}
+                {% else %}
+                    <span class="task-box">{{task.content}}
+                {% endif %}
+                    <input type="hidden" name="task_id" value="{{task.id}}">
+                    <input type="submit" value="Delete" class="delete" name='delete'>
+                    <input type="submit" value="Update" class="update" name='update'>
+                    
+                </span>
+                </button>
+            </form>
+
+            {% empty %}
+                <span class="no-tasks-message">No Tasks To Show</span>
+            {% endfor %}
+         </div>
+      <!-- End tasks content -->
+
+  </div>
+  <div class="task-stats">
+    <div class="tasks-count">
+      Tasks <span>{{tasks.count}}</span>
+    </div>
+    <div class="tasks-completed">
+      Completed <span>{{tasks_completed.count}}</span>
+    </div>
+  </div>
+
+{% endblock %}
